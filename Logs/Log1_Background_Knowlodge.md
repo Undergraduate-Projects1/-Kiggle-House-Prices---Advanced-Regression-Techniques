@@ -105,7 +105,68 @@ jupyter notebook
 ![8](https://i-blog.csdnimg.cn/direct/e270e1cd09b04c5da604f9343d73fcdf.png)
 
 
+## 遇到的问题
+- 报错：NotFoundError: D:\minicode\envs\czm2\lib\site-packages\tensorflow_decision_forests\tensorflow\ops\inference\inference.so not found
+- 解决：TF-DF 并没有为 Windows 构建或发布 inference 相关的动态库，因此无法正常运行模型推理功能。
+可以使用 Google Colab，它的环境是 Linux，且支持 TF-DF。
 
+## Google Colab使用指南: 项目创建和环境配置
+### 打开 Colab
+- 👉 访问：https://colab.research.google.com
+- 选择 File (文件) → New notebook（新建笔记本）。
+- Colab 会为你创建一个 .ipynb 文件（Jupyter notebook 格式）。
 
+### 安装依赖包
+- Colab 自带 TensorFlow，但你需要手动安装 TensorFlow Decision Forests。在第一个代码单元格中输入以下内容并运行：
+```python
+!pip install -U tensorflow_decision_forests
+```
 
+### 导入库并验证安装
+新建一个代码块，输入并运行：
+```python
+import tensorflow_decision_forests as tfdf
+import pandas as pd
+import numpy as np
 
+print("TF-DF version:", tfdf.__version__)
+```
+
+输出显示版本号即为安装成功。
+
+### 💾 保存或下载你的项目
+- 点击 File → Save a copy in Drive：保存到你的 Google Drive。
+- 点击 File → Download .ipynb：下载为本地 Jupyter 文件。
+
+### 💡 Google Colab 小技巧
+#### 📌 常用操作对照表
+
+| 操作名称               | 方法说明                                                           |
+|------------------------|--------------------------------------------------------------------|
+| 添加代码块             | 点击页面上方的 `+ Code` 按钮                                      |
+| 添加文本说明块         | 点击页面上方的 `+ Text` 按钮                                      |
+| 查看/管理工作目录文件  | 点击左侧边栏中的「📁 Files」图标                                   |
+| 上传本地文件           | 在「Files」面板中点击「Upload」按钮，选择文件进行上传              |
+| 下载文件到本地         | 右击文件 → `Download`                                             |
+| 将文件保存到 Google Drive | 点击左上角 `File → Save a copy in Drive`                        |
+| 以 `.ipynb` 下载 Notebook | 点击左上角 `File → Download → Download .ipynb`                |
+| 切换运行环境类型       | 点击 `Runtime → Change runtime type`，选择 `GPU` 或 `TPU`        |
+| 重新启动运行环境       | 点击 `Runtime → Restart runtime`                                  |
+| 安装 Python 第三方包   | 使用 `!pip install 包名`（如：`!pip install tensorflow_decision_forests`） |
+| 运行 shell 命令        | 在代码块中使用 `!命令`（如：`!ls`, `!wget`, `!unzip`）             |
+| 查看当前环境信息       | 使用命令 `!nvidia-smi`, `!pip list`, `!cat /etc/os-release` 等     |
+
+#### ✅ 推荐设置
+
+- 使用 `GPU` 训练模型：`Runtime → Change runtime type → Hardware accelerator → GPU`
+- 笔记本自动保存：所有变更会自动同步到 Google Drive
+- 推荐浏览器：Chrome、Firefox（支持最好）
+
+#### 📂 文件管理提示
+
+- 上传的文件默认存放在 `/content` 目录下
+- 上传后若未保存，Colab 重启后文件会消失（建议及时保存至 Google Drive）
+
+---
+
+更多帮助可访问：[Colab 官方帮助文档](https://research.google.com/colaboratory/faq.html)
